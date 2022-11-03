@@ -13,7 +13,7 @@ export class Home extends Component {
         super()
         this.state = {
             articles: this.articles,
-            loading: false,
+            loading: true,
             pageSize: 20,
             page: 1,
             dataUrl: this.url,
