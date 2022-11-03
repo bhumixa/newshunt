@@ -5,7 +5,7 @@ import newsData from '../news.json';
 
 export class Home extends Component {
     articles = newsData
-    
+
     constructor() {
         super()
         this.state = {
@@ -22,7 +22,7 @@ export class Home extends Component {
                 <div className="row">
                     {this.articles.map((article) => {
                         return <div className="col md-3" key={article.url}>
-                            <NewsItem  title={article.title} description={article.description} imgUrl={article.urlToImage} newsUrl={article.url} />
+                            <NewsItem title={article.title ? article.title.slice(0, 45) : ''} description={article.description ? article.description.slice(0, 80) : ""} imgUrl={article.urlToImage} newsUrl={article.url} />
                         </div>
                     })}
 
