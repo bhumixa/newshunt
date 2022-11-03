@@ -31,7 +31,7 @@ export class Home extends Component {
         console.log('render')
         return (
             <div className='container my-3'>
-                <h2>Top Headlines</h2>
+                <h1>News Hunt - Top Headlines</h1>
                 <div className="row">
                     {this.state.articles.map((article) => {
                         return <div className="col-md-3" key={article.url}>
