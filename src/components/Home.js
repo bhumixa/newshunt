@@ -4,7 +4,7 @@ import NewsItem from './NewsItem'
 import newsData from '../news.json';
 
 export class Home extends Component {
-    articles = newsData
+    articles = []
 
     constructor() {
         console.log('constructor')
@@ -17,12 +17,14 @@ export class Home extends Component {
 
     async componentDidMount(){
         console.log('componentDidMount')
-        let dataUrl = 'https://newsapi.org/v2/top-headlines?apiKey=ec0477e5e4154ba3a90b3fbb5bbf1a65&country=us';
+        let dataUrl = 'https://newsapi.org/v2/everything?q=apple&from=2022-11-02&to=2022-11-02&sortBy=popularity&apiKey=ec0477e5e4154ba3a90b3fbb5bbf1a65';
+        
         let d = await fetch(dataUrl)
+        console.log(d)
         let n = await d.json()
-        console.log(n)
-        this.setState({articles:n.articles})
-
+        console.log(n.articles)
+        this.setState({articles: n.articles});
+       // this.setState({articles:n.articles})        
     }
 
     render() {
@@ -31,7 +33,7 @@ export class Home extends Component {
             <div className='container my-3'>
                 <h2>Top Headlines</h2>
                 <div className="row">
-                    {this.articles.map((article) => {
+                    {this.state.articles.map((article) => {
                         return <div className="col-md-3" key={article.url}>
                             <NewsItem title={article.title ? article.title.slice(0, 45) : ''} description={article.description ? article.description.slice(0, 80) : ""} imgUrl={article.urlToImage} newsUrl={article.url} />
                         </div>
