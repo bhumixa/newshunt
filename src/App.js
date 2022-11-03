@@ -17,7 +17,7 @@ export default class App extends Component {
         <NavBar />
         
         <div className="container">
-      <Home />
+          <Home />
         </div>
       </>
     )
