@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import NewsItem from './NewsItem'
 //import PropTypes from 'prop-types'
 
 export class Home extends Component {
@@ -9,7 +10,10 @@ export class Home extends Component {
   render() {
     return (
       <div>
-        Home
+        <NewsItem />
+        <NewsItem />
+        <NewsItem />
+        <NewsItem />
       </div>
     )
   }

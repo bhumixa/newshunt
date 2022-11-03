@@ -2,7 +2,8 @@
 import './App.css';
 
 import React, { Component } from 'react'
-import Navbar from './components/Navbar';
+import NavBar from './components/NavBar';
+import Home from './components/Home';
 // import Home from './components/Home';
 // //import ReactDOM from "react-dom/client";
 // import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -13,9 +14,10 @@ export default class App extends Component {
   render() {
     return (
       <>
-        <Navbar />
+        <NavBar />
+        
         <div className="container">
-
+      <Home />
         </div>
       </>
     )
