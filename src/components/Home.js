@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import NewsItem from './NewsItem'
 //import PropTypes from 'prop-types'
 import newsData from '../news.json';
+import Spinner from './Spinner';
 
 export class Home extends Component {
     articles = []
@@ -40,6 +41,7 @@ export class Home extends Component {
     }
 
     previous = async () => {
+        await this.setState({ loading: true })
         if (this.state.page > 1) {
             await this.setState((state) => {
                 return { page: state.page - 1 }
@@ -51,10 +53,10 @@ export class Home extends Component {
     }
 
     next = async () => {
-
-        if (this.state.page + 1 > Math.ceil(this.state.totalRecords / 20)) {           
+        await this.setState({ loading: true })
+        if (this.state.page + 1 > Math.ceil(this.state.totalRecords / 20)) {
             console.log('---')
-        }else{
+        } else {
             await this.setState((state) => {
                 return { page: state.page + 1 }
             });
@@ -66,10 +68,10 @@ export class Home extends Component {
         console.log('render')
         return (
             <div className='container my-3'>
-                <h1>News Hunt - Top Headlines</h1>
-                <p></p>
+                <h1 className='text-center'>News Hunt - Top Headlines</h1>
+                {this.state.loading && <Spinner />}
                 <div className="row">
-                    {this.state.articles.map((article) => {
+                    {!this.state.loading && this.state.articles.map((article) => {
                         return <div className="col-md-3" key={article.url}>
                             <NewsItem title={article.title ? article.title.slice(0, 45) : ''} description={article.description ? article.description.slice(0, 80) : ""} imgUrl={article.urlToImage} newsUrl={article.url} />
                         </div>
