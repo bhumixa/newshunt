@@ -36,3 +36,31 @@
     transform: rotate(360deg);
   }
 }
+
+.home-logo{
+  height: 37px;
+    display: inline-block;
+    /* padding: 1px; */
+    margin-left: 9px;
+}
+
+.tal{
+  text-align: left;
+}
+
+.m-auto{
+  margin: auto;
+}
+
+.fl{
+  float: left;
+}
+
+.fr{
+  float: right;
+}
+
+.flex{
+  display: flex;
+}
+
