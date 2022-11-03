@@ -64,6 +64,16 @@
   display: flex;
 }
 
+.tac{
+  text-align: center;
+}
+.tar{
+  text-align: right;
+}
+.tal{
+  text-align: left;
+}
+
 .news-image{
   height: 200px;
 }
