@@ -6,24 +6,23 @@ import newsData from '../news.json';
 export class Home extends Component {
     articles = []
     url = 'https://newsapi.org/v2/everything?q=apple&from=2022-11-02&to=2022-11-02&sortBy=popularity&apiKey=ec0477e5e4154ba3a90b3fbb5bbf1a65';
-   
+
     constructor() {
         console.log('constructor')
         super()
         this.state = {
             articles: this.articles,
             loading: false,
-            pageSize: 12,
+            pageSize: 20,
             page: 1,
             dataUrl: this.url,
             totalRecords: 50,
-            disableNextBtn: false,
-            disablePrvBtn: true
+
         }
     }
 
     async loadData() {
-
+        await this.setState({ loading: true })
         let dataUrl = `${this.state.dataUrl}&pageSize=${this.state.pageSize}&page=${this.state.page}`;
         console.log(dataUrl)
 
@@ -31,6 +30,7 @@ export class Home extends Component {
         let n = await d.json()
         console.log(n.articles)
         this.setState({ articles: n.articles });
+        await this.setState({ loading: false })
     }
 
     async componentDidMount() {
@@ -40,33 +40,25 @@ export class Home extends Component {
     }
 
     previous = async () => {
-        let page = 0;
         if (this.state.page > 1) {
-            page = this.state.page - 1;
-        } else {
-            this.setState({
-                disablePrvBtn: true
+            await this.setState((state) => {
+                return { page: state.page - 1 }
             });
         }
-        console.log(this.state.disablePrvBtn)
-        await this.setState({ page: page })
+        // console.log(this.state.disablePrvBtn)
+        // await this.setState({ page: page })
         await this.loadData()
     }
 
     next = async () => {
-        let page = 0;
-        if (this.state.totalRecords > this.state.page) {
-            page = this.state.page + 1;
-            this.setState({
-                disablePrvBtn: false
-            });
-        } else {
-            this.setState({
-                disableNextBtn: !this.state.disableNextBtn
+
+        if (this.state.page + 1 > Math.ceil(this.state.totalRecords / 20)) {           
+            console.log('---')
+        }else{
+            await this.setState((state) => {
+                return { page: state.page + 1 }
             });
         }
-        console.log(page)
-        await this.setState({ page: page })
         await this.loadData()
     }
 
@@ -75,6 +67,7 @@ export class Home extends Component {
         return (
             <div className='container my-3'>
                 <h1>News Hunt - Top Headlines</h1>
+                <p></p>
                 <div className="row">
                     {this.state.articles.map((article) => {
                         return <div className="col-md-3" key={article.url}>
@@ -82,12 +75,13 @@ export class Home extends Component {
                         </div>
                     })}
                 </div>
+
                 <div className="row">
                     <div className="col-md-6 tal">
-                        <button type="button" className={`btn btn-info ${this.state.disablePrvBtn ? 'disabled' : ''}`} onClick={this.previous} aria-disabled={this.state.disablePrvBtn} >Previous</button>
+                        <button type="button" className="btn btn-info" onClick={this.previous} disabled={this.state.page <= 1} >Previous</button>
                     </div>
                     <div className="col-md-6 tar">
-                        <button type="button" className={`btn btn-info ${this.state.disableNextBtn ? 'disabled' : ''}`} onClick={this.next} aria-disabled={this.state.disableNextBtn}>Next</button>
+                        <button type="button" className="btn btn-info" onClick={this.next} disabled={this.state.page + 1 > Math.ceil(this.state.totalRecords / 20)}>Next</button>
                     </div>
                 </div>
 
