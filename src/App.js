@@ -14,8 +14,6 @@ export default class App extends Component {
   render() {
     return (
       <>
-
-
         <BrowserRouter>
           <NavBar />
           <Routes>
@@ -27,7 +25,6 @@ export default class App extends Component {
             <Route exact path="science" element={<News key="science" country="in" category='science' />} />
             <Route exact path="sports" element={<News key="sports" country="in" category='sports' />} />
             <Route exact path="technology" element={<News key="technology" country="in" category='technology' />} />
-
           </Routes>
         </BrowserRouter>
 

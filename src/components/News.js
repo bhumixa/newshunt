@@ -91,10 +91,10 @@ export class News extends Component {
 
                 <div className="row">
                     <div className="col-md-6 tal">
-                        <button type="button" className="btn btn-info" onClick={this.previous} disabled={this.state.page <= 1} >Previous</button>
+                        <button type="button" className="btn btn-dark" onClick={this.previous} disabled={this.state.page <= 1} >Previous</button>
                     </div>
                     <div className="col-md-6 tar">
-                        <button type="button" className="btn btn-info" onClick={this.next} disabled={this.state.page + 1 > Math.ceil(this.state.totalRecords / 20)}>Next</button>
+                        <button type="button" className="btn btn-dark" onClick={this.next} disabled={this.state.page + 1 > Math.ceil(this.state.totalRecords / 20)}>Next</button>
                     </div>
                 </div>
 
