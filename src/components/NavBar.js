@@ -10,11 +10,11 @@ export class NavBar extends Component {
         return (
             <>
                 <nav className="navbar navbar-dark  navbar-expand-lg bg-dark">
-                    <a className="navbar-brand flex" href="/">
-                        <img src={process.env.PUBLIC_URL + '/logo.png'} className="home-logo" alt="" />
-                        <h3 className=''>Newshunt</h3>
-                    </a>
                     <div className="container-fluid">
+                        <a className="navbar-brand flex" href="/">
+                            <img src={process.env.PUBLIC_URL + '/logo.png'} className="home-logo" alt="" />
+                            <h3 className=''>Newshunt</h3>
+                        </a>
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
