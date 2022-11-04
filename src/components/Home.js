@@ -1,15 +1,24 @@
 import React, { Component } from 'react'
 import NewsItem from './NewsItem'
-//import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 import newsData from '../news.json';
 import Spinner from './Spinner';
 
 export class Home extends Component {
+    static defaultProps = {
+        country:'in',
+        category:'business'
+    }
+    static propTypes = {
+        country:PropTypes.string,
+        category:PropTypes.string
+    }
+
     articles = []
-    url = 'https://newsapi.org/v2/everything?q=apple&from=2022-11-02&to=2022-11-02&sortBy=popularity&apiKey=ec0477e5e4154ba3a90b3fbb5bbf1a65';
+    url = 'https://newsapi.org/v2/top-headlines?apiKey=ec0477e5e4154ba3a90b3fbb5bbf1a65';
 
     constructor() {
-        console.log('constructor')
+        console.log('constructor')       
         super()
         this.state = {
             articles: this.articles,
@@ -24,7 +33,7 @@ export class Home extends Component {
 
     async loadData() {
         await this.setState({ loading: true })
-        let dataUrl = `${this.state.dataUrl}&pageSize=${this.state.pageSize}&page=${this.state.page}`;
+        let dataUrl = `${this.state.dataUrl}&country=${this.props.country}&category=${this.props.category}&pageSize=${this.state.pageSize}&page=${this.state.page}`;
         console.log(dataUrl)
 
         let d = await fetch(dataUrl);
