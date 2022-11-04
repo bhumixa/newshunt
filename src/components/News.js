@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import newsData from '../news.json';
 import Spinner from './Spinner';
 
-export class Home extends Component {
+export class News extends Component {
     static defaultProps = {
         country:'in',
         category:'business'
@@ -33,6 +33,8 @@ export class Home extends Component {
 
     async loadData() {
         await this.setState({ loading: true })
+        console.log(this.props.category)
+        //debugger
         let dataUrl = `${this.state.dataUrl}&country=${this.props.country}&category=${this.props.category}&pageSize=${this.state.pageSize}&page=${this.state.page}`;
         console.log(dataUrl)
 
@@ -81,7 +83,7 @@ export class Home extends Component {
                 {this.state.loading && <Spinner />}
                 <div className="row">
                     {!this.state.loading && this.state.articles.map((article) => {
-                        return <div className="col-md-3" key={article.url}>
+                        return <div className="col-md-3 " key={article.url}>
                             <NewsItem title={article.title ? article.title.slice(0, 45) : ''} description={article.description ? article.description.slice(0, 80) : ""} imgUrl={article.urlToImage} newsUrl={article.url} />
                         </div>
                     })}
@@ -101,4 +103,4 @@ export class Home extends Component {
     }
 }
 
-export default Home
+export default News
