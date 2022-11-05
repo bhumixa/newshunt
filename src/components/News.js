@@ -6,20 +6,24 @@ import Spinner from './Spinner';
 
 export class News extends Component {
     static defaultProps = {
-        country:'in',
-        category:'business'
+        country: 'in',
+        category: 'business'
     }
     static propTypes = {
-        country:PropTypes.string,
-        category:PropTypes.string
+        country: PropTypes.string,
+        category: PropTypes.string
     }
 
     articles = []
     url = 'https://newsapi.org/v2/top-headlines?apiKey=ec0477e5e4154ba3a90b3fbb5bbf1a65';
 
-    constructor() {
-        console.log('constructor')       
-        super()
+    makeCapitalize = (word) =>{
+        console.log(word)
+        return word.charAt(0).toUpperCase() + word.slice(1)
+    }
+    constructor(props) {
+        console.log('constructor')
+        super(props)
         this.state = {
             articles: this.articles,
             loading: true,
@@ -29,6 +33,7 @@ export class News extends Component {
             totalRecords: 50,
 
         }
+        document.title = `${this.makeCapitalize(this.props.category)} - News Hunt`
     }
 
     async loadData() {
@@ -84,7 +89,8 @@ export class News extends Component {
                 <div className="row">
                     {!this.state.loading && this.state.articles.map((article) => {
                         return <div className="col-md-3 " key={article.url}>
-                            <NewsItem title={article.title ? article.title.slice(0, 45) : ''} description={article.description ? article.description.slice(0, 80) : ""} imgUrl={article.urlToImage} newsUrl={article.url} />
+                            <NewsItem title={article.title ? article.title.slice(0, 45) : ''} description={article.description ? article.description.slice(0, 80) : ""}
+                                imgUrl={article.urlToImage} newsUrl={article.url} author={article.author ? article.author : 'Unknown'} date={article.publishedAt} />
                         </div>
                     })}
                 </div>
