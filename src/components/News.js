@@ -17,7 +17,7 @@ export class News extends Component {
     articles = []
     url = 'https://newsapi.org/v2/top-headlines?apiKey=ec0477e5e4154ba3a90b3fbb5bbf1a65';
 
-    makeCapitalize = (word) =>{
+    makeCapitalize = (word) => {
         console.log(word)
         return word.charAt(0).toUpperCase() + word.slice(1)
     }
@@ -84,7 +84,7 @@ export class News extends Component {
         console.log('render')
         return (
             <div className='container my-3'>
-                <h1 className='text-center'>News Hunt - Top Headlines</h1>
+                <h1 className='text-center'>News Hunt - Top {this.makeCapitalize(this.props.category)} Headlines </h1>
                 {this.state.loading && <Spinner />}
                 <div className="row">
                     {!this.state.loading && this.state.articles.map((article) => {
